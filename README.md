@@ -5,4 +5,9 @@
 
 <a href="https://codeclimate.com/github/Rust2323/frontend-project-lvl2/test_coverage"><img src="https://api.codeclimate.com/v1/badges/b6dc3dec1ef1a6a714ce/test_coverage" /></a>
 
-https://asciinema.org/a/RITUEevEeZOu7tUc0WMIstvih
+This programm takes two files, and check their differences.
+
+Use "gendiff -h" for help;
+It works with absolut and nonabsolut ways to files.
+
+[![asciicast](https://asciinema.org/a/RITUEevEeZOu7tUc0WMIstvih.svg)](https://asciinema.org/a/RITUEevEeZOu7tUc0WMIstvih)
