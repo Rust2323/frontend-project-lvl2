@@ -92,9 +92,8 @@ const compare = (object1, object2) => {
       }
     }
   }
-  
+
   return sort(result);
-  
 };
 
 export { compare, makeString };
