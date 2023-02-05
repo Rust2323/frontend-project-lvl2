@@ -1,43 +1,35 @@
+/* eslint no-param-reassign: "error" */
 const makeString = (obj) => {
   const string = JSON.stringify(obj);
   let newString = '';
-  for (const letter of string) {
-    if (letter === '{') {
-      newString = `${letter}\n${newString}`;
+  for (let i = 0; i < string.length; i += 1) {
+    if (string[i] === '{') {
+      newString = `${string[i]}\n${newString}`;
     }
-    if (letter === '}') {
-      newString = `${newString}\n${letter}`;
+    if (string[i] === '}') {
+      newString = `${newString}\n${string[i]}`;
     }
-    if (letter !== '"' && letter !== ','
-        && letter !== '{'
-        && letter !== '}') {
-      newString += letter;
+    if (string[i] !== '"' && string[i] !== ','
+        && string[i] !== '{'
+        && string[i] !== '}') {
+      newString += string[i];
     }
-    if (letter === ',') {
+    if (string[i] === ',') {
       newString += '\n';
     }
-    if (letter === ':') {
+    if (string[i] === ':') {
       newString += ' ';
     }
   }
   return newString;
 };
 
-const makeMinus = (obj) => {
-  const result = {};
-  const entries = Object.entries(obj);
-  for (const [key, value] of entries) {
-    result[`- ${key}`] = value;
-  }
-  return result;
-};
-
-const makePlus = (obj) => {
-  const result = {};
-  const entries = Object.entries(obj);
-  for (const [key, value] of entries) {
-    result[`+ ${key}`] = value;
-  }
+const changeKeyName = (object, simbol = '') => {
+  const keys = Object.keys(object);
+  const result = keys.reduce((obj, key) => {
+    obj[`${simbol} ${key}`] = object[key];
+    return obj;
+  }, {});
   return result;
 };
 
@@ -45,18 +37,20 @@ const sort = (object) => {
   const newKeys = [];
   const keys = Object.keys(object);
 
-  for (const key of keys) {
-    newKeys.push(key.slice(2));
+  for (let i = 0; i < keys.length; i += 1) {
+    newKeys.push(keys[i].slice(2));
   }
   const sortObj = newKeys.sort()
     .reduce(
       (obj, key) => {
         for (let i = 0; i < keys.length; i += 1) {
-          if (key === keys[i].slice(2) && keys[i].slice(0, 2) === '  ') {
+          const clearKey = keys[i].slice(2);
+          const keySimbol = keys[i].slice(0, 2);
+          if (key === clearKey && keySimbol === '  ') {
             obj[`    ${key}`] = object[`  ${key}`];
-          } else if (key === keys[i].slice(2) && keys[i].slice(0, 2) === '- ') {
+          } else if (key === clearKey && keySimbol === '- ') {
             obj[`  - ${key}`] = object[`- ${key}`];
-          } else if (key === keys[i].slice(2) && keys[i].slice(0, 2) === '+ ') {
+          } else if (key === clearKey && keySimbol === '+ ') {
             obj[`  + ${key}`] = object[`+ ${key}`];
           }
         }
@@ -69,30 +63,29 @@ const sort = (object) => {
 };
 
 const compare = (object1, object2) => {
-  const obj1 = makeMinus(object1);
-  const obj2 = makePlus(object2);
-
-  const entries1 = Object.entries(obj1);
-  const entries2 = Object.entries(obj2);
-
-  const result = { ...obj1, ...obj2 };
-  for (const [key1, value1] of entries1) {
-    for (const [key2, value2] of entries2) {
-      if (key1.slice(2) === key2.slice(2)) {
-        delete result[key1];
-        delete result[key2];
-        if (value1 === value2) {
-          delete result[key2];
-          const newKey = `  ${key1.slice(2)}`;
-          result[newKey] = value1;
-        } else {
-          result[key1] = value1;
-          result[key2] = value2;
-        }
+  const obj1 = changeKeyName(object1, '-');
+  const obj2 = changeKeyName(object2, '+');
+  const sum = { ...obj1, ...obj2 };
+  const objectsKeys = Object.keys(sum);
+  const result = {};
+  /* eslint-disable-next-line */
+  for (const key of objectsKeys) {
+    const cleanKey = key.slice(2);
+    if (!Object.hasOwn(object1, cleanKey)) {
+      result[key] = obj2[key];
+    } else if (!Object.hasOwn(object2, cleanKey)) {
+      result[key] = obj1[key];
+    } else if (object1[cleanKey] === object2[cleanKey]) {
+      const newKey = `  ${cleanKey}`;
+      result[newKey] = obj2[key];
+    } else if (Object.hasOwn(object1, cleanKey) && Object.hasOwn(object2, cleanKey)) {
+      if (key.slice(0, 1) === '-') {
+        result[key] = obj1[key];
+      } else {
+        result[key] = obj2[key];
       }
     }
   }
-
   return sort(result);
 };
 
