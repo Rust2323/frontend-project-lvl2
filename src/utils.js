@@ -1,26 +1,11 @@
 /* eslint no-param-reassign: "error" */
 const makeString = (obj) => {
-  const string = JSON.stringify(obj);
-  let newString = '';
-  for (let i = 0; i < string.length; i += 1) {
-    if (string[i] === '{') {
-      newString = `${string[i]}\n${newString}`;
-    }
-    if (string[i] === '}') {
-      newString = `${newString}\n${string[i]}`;
-    }
-    if (string[i] !== '"' && string[i] !== ','
-        && string[i] !== '{'
-        && string[i] !== '}') {
-      newString += string[i];
-    }
-    if (string[i] === ',') {
-      newString += '\n';
-    }
-    if (string[i] === ':') {
-      newString += ' ';
-    }
+  let newString = '{\n';
+  const keys = Object.keys(obj);
+  for (let i = 0; i < keys.length; i += 1) {
+    newString += `  ${keys[i]}: ${obj[keys[i]]}\n`;
   }
+  newString += '}';
   return newString;
 };
 
@@ -47,11 +32,11 @@ const sort = (object) => {
           const clearKey = keys[i].slice(2);
           const keySimbol = keys[i].slice(0, 2);
           if (key === clearKey && keySimbol === '  ') {
-            obj[`    ${key}`] = object[`  ${key}`];
+            obj[`  ${key}`] = object[`  ${key}`];
           } else if (key === clearKey && keySimbol === '- ') {
-            obj[`  - ${key}`] = object[`- ${key}`];
+            obj[`- ${key}`] = object[`- ${key}`];
           } else if (key === clearKey && keySimbol === '+ ') {
-            obj[`  + ${key}`] = object[`+ ${key}`];
+            obj[`+ ${key}`] = object[`+ ${key}`];
           }
         }
 
