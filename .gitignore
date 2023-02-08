@@ -1,1 +1,7 @@
 node_modules/
+
+# Ignore coverage files
+/coverage
+.tool-versions
+.idea/
+app/assets/builds/
