@@ -10,10 +10,8 @@ jobs:
           node-version: 18
           cache: npm
       - run: make install
-      - name: testing...
-        run: make test
-      - name: check linter
-        run: make lint
+      - run: make lint
+      - run: make test
         - name: Test & publish code coverage
           uses: paambaati/codeclimate-action@v3.0.0
           env:
