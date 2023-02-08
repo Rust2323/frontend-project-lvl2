@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1675866716524" clover="3.2.0">
-  <project timestamp="1675866716524" name="All files">
+<coverage generated="1675869599301" clover="3.2.0">
+  <project timestamp="1675869599301" name="All files">
     <metrics statements="57" coveredstatements="57" conditionals="25" coveredconditionals="23" methods="7" coveredmethods="7" elements="89" coveredelements="87" complexity="0" loc="57" ncloc="57" packages="1" files="2" classes="2"/>
     <file name="index.js" path="/home/rust2323/frontend-project-lvl2/src/index.js">
       <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
