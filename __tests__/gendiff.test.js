@@ -13,7 +13,14 @@ const expectedJSON = readFile('json.txt');
 const filepath1 = getFixturePath('file1.json');
 const filepath2 = getFixturePath('file2.json');
 
-test('compare two objects', () => {
+test('compare two json objects', () => {
   expect(genDiff(filepath1, filepath2))
+    .toEqual(expectedJSON);
+});
+
+const filepathYml1 = getFixturePath('file1.yml');
+const filepathYml2 = getFixturePath('file2.yml');
+test('compare two yml objects', () => {
+  expect(genDiff(filepathYml1, filepathYml2))
     .toEqual(expectedJSON);
 });
