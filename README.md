@@ -7,6 +7,10 @@
 This programm takes two files, and check their differences.
 
 Use "gendiff -h" for help;
-It works with absolut and nonabsolut ways to files.
+It works with absolut or nonabsolut ways to files. Also it could compare json and yml files.
 
+## 1. Compare json files:
 [![asciicast](https://asciinema.org/a/RITUEevEeZOu7tUc0WMIstvih.svg)](https://asciinema.org/a/RITUEevEeZOu7tUc0WMIstvih)
+
+## 2. Compare yml files:
+[![asciicast](https://asciinema.org/a/2vpwKBAYVPfyY4HYO5sGxvfFR.svg)](https://asciinema.org/a/2vpwKBAYVPfyY4HYO5sGxvfFR)
