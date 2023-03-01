@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
-import { compare, makeString } from './utils.js';
+import buildTree from './utils.js';
+import stylish from './formatters/stylish.js';
 import parser from './parsers.js';
 
 export const genDiff = (filepath1, filepath2) => {
@@ -22,8 +23,8 @@ export const genDiff = (filepath1, filepath2) => {
   const obj1 = parser(readFile1, extention1);
   const obj2 = parser(readFile2, extention2);
 
-  const resultObject = compare(obj1, obj2);
-  const str = makeString(resultObject);
+  const resultObject = buildTree(obj1, obj2);
+  const str = stylish(resultObject);
   console.log(str);
   return str;
 };
