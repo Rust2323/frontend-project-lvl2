@@ -4,7 +4,7 @@ import buildTree from './utils.js';
 import parser from './parsers.js';
 import format from './formatters/index.js';
 
-export const genDiff = (filepath1, filepath2, formatName = 'stylish') => {
+const genDiff = (filepath1, filepath2, formatName = 'stylish') => {
   const getExtention = (filepath) => path.extname(filepath).slice(1);
 
   const getCurrentPath = (filepath) => path.resolve((process.cwd(), filepath));
@@ -27,3 +27,5 @@ export const genDiff = (filepath1, filepath2, formatName = 'stylish') => {
 
   return format(resultObject, formatName);
 };
+
+export default genDiff;
