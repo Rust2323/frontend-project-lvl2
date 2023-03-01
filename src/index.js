@@ -1,10 +1,10 @@
 import fs from 'fs';
 import path from 'path';
 import buildTree from './utils.js';
-import stylish from './formatters/stylish.js';
 import parser from './parsers.js';
+import format from './formatters/index.js';
 
-export const genDiff = (filepath1, filepath2) => {
+export const genDiff = (filepath1, filepath2, formatName = 'stylish') => {
   const getExtention = (filepath) => path.extname(filepath).slice(1);
 
   const getCurrentPath = (filepath) => path.resolve((process.cwd(), filepath));
@@ -24,7 +24,6 @@ export const genDiff = (filepath1, filepath2) => {
   const obj2 = parser(readFile2, extention2);
 
   const resultObject = buildTree(obj1, obj2);
-  const str = stylish(resultObject);
-  console.log(str);
-  return str;
+
+  return format(resultObject, formatName);
 };
