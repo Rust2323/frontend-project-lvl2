@@ -14,3 +14,6 @@ It works with absolut or nonabsolut ways to files. Also it could compare json an
 
 ## 2. Compare yml files:
 [![asciicast](https://asciinema.org/a/2vpwKBAYVPfyY4HYO5sGxvfFR.svg)](https://asciinema.org/a/2vpwKBAYVPfyY4HYO5sGxvfFR)
+
+## 3. Use different formatters for output (plain, json, stylish - default):
+[![asciicast](https://asciinema.org/a/AK4ipLTnpg5iJ1BOdicz3FuLK.svg)](https://asciinema.org/a/AK4ipLTnpg5iJ1BOdicz3FuLK)
